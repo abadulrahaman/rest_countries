@@ -1,7 +1,9 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom';
 
 export const Card = (props) => {
 
+    const navigate = useNavigate();
     const {propData} = props;
 
     const {
@@ -12,9 +14,15 @@ export const Card = (props) => {
         capital,
     } = propData;
 
+    const handleClick = () => {
+        navigate(`/details/${name.common}`);
+    }
 
   return (
-    <div className='w-[350px] shadow-lg rounded-xl m-12'>
+    <div 
+        onClick={handleClick} 
+        className='w-[350px] shadow-lg rounded-xl m-12'
+    >
         <img 
             className='w-full h-1/2 rounded-tl-xl rounded-tr-xl'
             src={flags.png}
@@ -42,3 +50,7 @@ export const Card = (props) => {
     </div>
   )
 }
+
+
+
+

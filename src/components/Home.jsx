@@ -46,7 +46,6 @@ export const Home = () => {
 
   return (
     <div>
-        <Header/>
         <div className='flex items-center justify-between my-4 mx-8'>
             <div className='m-8 flex items-center gap-4 shadow-lg p-4 w-fit rounded-lg text-[#A0A1A2] text-xl'>
                 <IoSearchOutline className='cursor-pointer' onClick={searchbutton}/>
@@ -93,3 +92,5 @@ export const Home = () => {
     </div>
   )
 }
+
+
