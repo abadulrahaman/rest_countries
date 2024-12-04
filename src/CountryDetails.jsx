@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { FaArrowLeftLong } from 'react-icons/fa6'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 
 export const CountryDetails = () => {
 
-    const {id} = useParams();
+    const {id} = useParams(); // this get the country name
     const [countryData, setCountryData] = useState(null);
-
+    const navigate = useNavigate()
 
 
     useEffect(() => {
@@ -38,9 +38,14 @@ export const CountryDetails = () => {
         languages,
     } = countryData;
 
+    console.log(id);
+
   return (
     <div>
-        <div className='flex items-center gap-2 py-4 px-10 shadow-lg text-2xl w-fit rounded-xl my-14  mx-20 cursor-pointer'>
+        <div 
+            onClick={() => navigate(-1)}
+            className='flex items-center gap-2 py-4 px-10 shadow-lg text-2xl w-fit rounded-xl my-14  mx-20 cursor-pointer'
+        >
             <FaArrowLeftLong />
             <p>Back</p>
         </div>
@@ -48,17 +53,18 @@ export const CountryDetails = () => {
         <div className='flex'>
             <img
                 className='shadow-md w-[850px] h-[350px] ml-28 mr-12'
-                src={flags.png}
+                src={flags?.png}
                 alt="Error" 
             />
 
             <div className='flex flex-col gap-4'>
-                <h1 className='text-3xl font-bold capitalize'>{name.common}</h1>
+                <h1 className='text-3xl font-bold capitalize'>{name?.common}</h1>
                 <div className='flex gap-12'>
                    <div className='flex flex-col gap-2'>
                      <div className='flex items-center gap-2'>
                         <p className='text-xl font-semibold'>Native Name : </p>
-                        <p className='text-lg'>{name.nativeName.common}</p>
+                        <p className='text-lg'>{name?.nativeName? Object.values(name?.nativeName)[0]?.common:"N/A"}
+                        </p>
                      </div>
 
                      <div className='flex items-center gap-2'>
@@ -78,7 +84,7 @@ export const CountryDetails = () => {
 
                      <div className='flex items-center gap-2'>
                         <p className='text-xl font-semibold'>Capital : </p>
-                        <p className='text-lg'>{capital}</p>
+                        <p className='text-lg'>{capital?.[0]}</p>
                      </div>
 
                     </div> 
@@ -86,17 +92,18 @@ export const CountryDetails = () => {
                     <div className='flex flex-col gap-2'>
                         <div className='flex items-center gap-2'>
                             <p className='text-xl font-semibold'>Top Level Domain : </p>
-                            <p className='text-lg'>{tld}</p>
+                            <p className='text-lg'>{tld?.join(", ")}</p>
                         </div>
 
                         <div className='flex items-center gap-2'>
                             <p className='text-xl font-semibold'>Currencies : </p>
-                            <p className='text-lg'>{currencies.NPR.name}</p>
+                            <p className='text-lg'>{currencies? Object.values(currencies)[0]?.name:", "}
+                            </p>
                         </div>
 
                         <div className='flex items-center gap-2'>
                             <p className='text-xl font-semibold'>Languages : </p>
-                            <p className='text-lg'>{languages}</p>
+                            <p className='text-lg'>{languages? Object.values(languages).join(", "): "N/A"}</p>
                         </div> 
                     </div>
                 </div>
@@ -104,7 +111,12 @@ export const CountryDetails = () => {
                 <div className='flex gap-4 items-center my-12'>
                     <h1 className='text-xl font-semibold'>Border Countries : </h1>
                     <div className='flex items-center gap-4'>
-                        <p className='py-2 px-4 shadow-lg'>Pakistan</p>
+                        {countryData?.borders?.length > 0 ? countryData.borders.map((border, index) => (
+                            <p key={index} className='py-2 px-4 shadow-lg'>{border}</p>
+                        ))
+                        : "None"
+                        }
+                        
                         <p className='py-2 px-4 shadow-lg'>Pakistan</p>
                     </div>
                 </div>
@@ -114,7 +126,6 @@ export const CountryDetails = () => {
     </div>
   )
 }
-
 
 
 
