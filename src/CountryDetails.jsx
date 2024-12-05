@@ -52,7 +52,7 @@ export const CountryDetails = () => {
 
         <div className='flex'>
             <img
-                className='shadow-md w-[850px] h-[350px] ml-28 mr-12'
+                className='shadow-md w-[850px] h-[550px] ml-28 mr-12'
                 src={flags?.png}
                 alt="Error" 
             />
@@ -110,7 +110,10 @@ export const CountryDetails = () => {
 
                 <div className='flex gap-4 items-center my-12'>
                     <h1 className='text-xl font-semibold'>Border Countries : </h1>
-                    <div className='flex items-center gap-4'>
+                    <div 
+                        onClick={countryData}
+                        className='flex items-center gap-4 cursor-pointer'
+                    >
                         {countryData?.borders?.length > 0 ? countryData.borders.map((border, index) => (
                             <p key={index} className='py-2 px-4 shadow-lg'>{border}</p>
                         ))
