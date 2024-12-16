@@ -8,14 +8,23 @@ import { MainLayout } from './MainLayout'
 import { CountryDetails } from './countryDetails'
 
 function App() {
+  const [darkMode, setDarkMode] = useState(false)
 
+  const turnDarkMode = () => {
+    setDarkMode(!darkMode)
+  }
   return (
     <div>
       <BrowserRouter>
         <Routes>
-          <Route path='/' element={<MainLayout/>}>
-            <Route index element={<Home/>}/>
-            <Route path='details/:id' element={<CountryDetails/>} />
+          <Route
+            path="/"
+            element={
+              <MainLayout darkMode={darkMode} setDarkMode={turnDarkMode} />
+            }
+          >
+            <Route index element={<Home darkMode={darkMode} />} />
+            <Route path="details/:id" element={<CountryDetails />} />
           </Route>
         </Routes>
       </BrowserRouter>
