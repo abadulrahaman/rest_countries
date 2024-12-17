@@ -132,8 +132,8 @@ export const Home = (props) => {
             <Card key={index} propData={country} darkMode={props.darkMode} />
           ))
         ) : (
-          <div className="text-3xl font-semibold text-red-500 text-center">
-            No countries found
+          <div className="text-3xl font-semibold  text-center">
+            Loading........
           </div>
         )}
       </div>
