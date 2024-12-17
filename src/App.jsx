@@ -5,7 +5,7 @@ import './App.css'
 import { Home } from './components/Home'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { MainLayout } from './MainLayout'
-import CountryDetails from './CountryDetails'
+import CountryDetails from './countryDetails'
 function App() {
   const [darkMode, setDarkMode] = useState(false)
 
